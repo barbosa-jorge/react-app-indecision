@@ -1,9 +1,11 @@
-
 const path = require('path')
 
+module.exports = (env) => {
 
-module.exports = {
-    entry: './src/app.js',
+    const isProduction = env === 'production';
+
+    return {
+        entry: './src/app.js',
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
@@ -23,8 +25,9 @@ module.exports = {
             ]
         }]
     },
-    devtool: 'cheap-module-eval-source-map',
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
         contentBase: path.join(__dirname, 'public')
+    }
     }
 }
